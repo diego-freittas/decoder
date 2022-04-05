@@ -29,22 +29,26 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
-    @GetMapping("/userId")
-    public ResponseEntity<?> getUserById(@PathVariable("userId") UUID userId) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<Object> getOneUser(@PathVariable(value = "userId") UUID userId){
         Optional<UserModel> userModelOptional = userService.findById(userId);
-        if (userModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
+        if(!userModelOptional.isPresent()){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        } else{
+            return  ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
-    @DeleteMapping("/userId")
-    public ResponseEntity<?> deleteUserById(@PathVariable("userId") UUID userId) {
+
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId){
         Optional<UserModel> userModelOptional = userService.findById(userId);
-        if (userModelOptional.isPresent()) {
-            userService.deleteById(userId);
-            return ResponseEntity.status(HttpStatus.OK).body("User deleted");
+        if(!userModelOptional.isPresent()){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        } else{
+            userService.deleteById(userModelOptional.get().getUserId());
+            return  ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
 
     @PutMapping("/{userId}")
