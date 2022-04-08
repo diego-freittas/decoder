@@ -1,7 +1,7 @@
 package com.ead.authuser.controllers;
 
 import com.ead.authuser.dtos.UserDto;
-import com.ead.authuser.enums.UserStatus;
+import com.ead.authuser.enuns.UserStatus;
 import com.ead.authuser.enuns.UserType;
 import com.ead.authuser.models.UserModel;
 import com.ead.authuser.services.UserService;
