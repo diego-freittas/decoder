@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -34,6 +35,12 @@ public class UserController {
             @PageableDefault(page = 0,size = 10, sort = "userId", direction = Sort.Direction.ASC)
                                                        Pageable pageable) {
         Page<UserModel> userModelPage = userService.findAll(spec, pageable);
+        if (!userModelPage.isEmpty()){
+                for (UserModel user : userModelPage.toList()){
+                    user.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UserController.class)
+                            .getOneUser(user.getUserId())).withSelfRel());
+                }
+        }
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
 
