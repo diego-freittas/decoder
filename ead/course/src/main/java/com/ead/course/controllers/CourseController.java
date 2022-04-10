@@ -36,7 +36,7 @@ public class CourseController {
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId){
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
-        if(!courseModelOptional.isEmpty()){
+        if(!courseModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course Not Found");
         }
         courseService.delete(courseModelOptional.get());
@@ -48,7 +48,7 @@ public class CourseController {
                                                @RequestBody @Valid CourseDto courseDto) {
 
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
-        if(!courseModelOptional.isEmpty()){
+        if(!courseModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course Not Found");
         }
 
@@ -57,7 +57,7 @@ public class CourseController {
         courseModel.setDescription(courseDto.getDescription());
         courseModel.setImageUrl(courseDto.getImageUrl());
         courseModel.setCourseStatus(courseDto.getCourseStatus());
-        courseModel.setCouserLevel(courseDto.getCouserLevel());
+        courseModel.setCourseLevel(courseDto.getCourseLevel());
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.OK).body(courseService.save(courseModel));
     }

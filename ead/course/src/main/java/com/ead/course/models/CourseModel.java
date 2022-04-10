@@ -51,7 +51,7 @@ public class CourseModel implements Serializable {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private CouserLevel couserLevel;
+    private CouserLevel courseLevel;
 
     @Column(nullable = false)
     private UUID userInstructor;
