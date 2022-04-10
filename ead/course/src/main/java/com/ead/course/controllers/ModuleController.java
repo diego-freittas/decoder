@@ -82,4 +82,9 @@ public class ModuleController {
         return ResponseEntity.status(HttpStatus.OK).body(moduleModelOptional.get());
     }
 
+    @GetMapping("/courses/{courceId}/modules")
+    public ResponseEntity<Object> getAllModule(@PathVariable(value = "courseId") UUID courseId){
+        return ResponseEntity.status(HttpStatus.OK).body(moduleSevice.findAllByCourse(courseId));
+    }
+
 }

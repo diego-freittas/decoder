@@ -1,10 +1,10 @@
 package com.ead.course.services.impl;
 
 import com.ead.course.models.CourseModel;
-import com.ead.course.models.LesonModel;
+import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import com.ead.course.repositories.CourseRepository;
-import com.ead.course.repositories.LesonRepository;
+import com.ead.course.repositories.LessonRepository;
 import com.ead.course.repositories.ModuleRepository;
 import com.ead.course.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
     ModuleRepository moduleRepository;
 
     @Autowired
-    LesonRepository lesonRepository;
+    LessonRepository lesonRepository;
 
     @Transactional
     @Override
@@ -34,7 +34,7 @@ public class CourseServiceImpl implements CourseService {
         List<ModuleModel> moduleModelList = moduleRepository.findAllModulesIntoCourse(course.getCourseId());
         if (!moduleModelList.isEmpty()){
             for (ModuleModel module : moduleModelList){
-                List<LesonModel> lesonModelList = lesonRepository.findAllLessonsIntoModule(module.getModuleId());
+                List<LessonModel> lesonModelList = lesonRepository.findAllLessonsIntoModule(module.getModuleId());
                 if (!lesonModelList.isEmpty()){
                     lesonRepository.deleteAll(lesonModelList);
                 }
