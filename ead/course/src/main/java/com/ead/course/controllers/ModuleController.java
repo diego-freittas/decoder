@@ -43,7 +43,7 @@ public class ModuleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(moduleSevice.save(moduleModel));
     }
 
-    @DeleteMapping("/courses/{courceId}/modules/{moduleId}")
+    @DeleteMapping("/courses/{courseId}/modules/{moduleId}")
     public ResponseEntity<Object> deleteModule(@PathVariable(value = "courseId") UUID courseId,
                                                @PathVariable(value = "moduleId") UUID moduleId){
         Optional<ModuleModel> moduleModelOptional = moduleSevice.findModuleIntoCourse(courseId,moduleId);
@@ -55,7 +55,7 @@ public class ModuleController {
     }
 
 
-    @PutMapping("/courses/{courceId}/modules/{moduleId}")
+    @PutMapping("/courses/{courseId}/modules/{moduleId}")
     public ResponseEntity<Object> updateModule(@PathVariable(value = "courseId") UUID courseId,
                                                @PathVariable(value = "moduleId") UUID moduleId,
                                                @RequestBody @Valid ModuleDto moduleDto) {
@@ -71,7 +71,7 @@ public class ModuleController {
         return ResponseEntity.status(HttpStatus.OK).body(moduleSevice.save(moduleModel));
     }
 
-    @GetMapping("/courses/{courceId}/modules/{moduleId}")
+    @GetMapping("/courses/{courseId}/modules/{moduleId}")
     public ResponseEntity<Object> getOneModule(@PathVariable(value = "courseId") UUID courseId,
                                                            @PathVariable(value = "moduleId") UUID moduleId){
 
@@ -82,7 +82,7 @@ public class ModuleController {
         return ResponseEntity.status(HttpStatus.OK).body(moduleModelOptional.get());
     }
 
-    @GetMapping("/courses/{courceId}/modules")
+    @GetMapping("/courses/{courseId}/modules")
     public ResponseEntity<Object> getAllModule(@PathVariable(value = "courseId") UUID courseId){
         return ResponseEntity.status(HttpStatus.OK).body(moduleSevice.findAllByCourse(courseId));
     }
