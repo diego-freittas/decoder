@@ -1,7 +1,6 @@
 package com.ead.course.services;
 
 import com.ead.course.models.ModuleModel;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
