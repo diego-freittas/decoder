@@ -23,6 +23,7 @@ import java.util.UUID;
 @Table(name = "TB_COURSES")
 public class CourseModel implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +39,11 @@ public class CourseModel implements Serializable {
     private String imageUrl;
 
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_FORMAT)
     private LocalDateTime creationDate;
 
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_FORMAT)
     private LocalDateTime lastUpdateDate;
 
     @Column(nullable = false)

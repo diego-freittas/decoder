@@ -16,6 +16,7 @@ import java.util.UUID;
 @Table(name = "TB_LESSONS")
 public class LessonModel implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +32,7 @@ public class LessonModel implements Serializable {
     private String videoUrl;
 
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATETIME_FORMAT)
     private LocalDateTime creationDate;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
