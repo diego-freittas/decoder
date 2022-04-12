@@ -1,9 +1,9 @@
-package com.ead.course.models.services.impl;
+package com.ead.course.services.impl;
 
 import com.ead.course.models.CourseModel;
 import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
-import com.ead.course.models.services.CourseService;
+import com.ead.course.services.CourseService;
 import com.ead.course.repositories.CourseRepository;
 import com.ead.course.repositories.LessonRepository;
 import com.ead.course.repositories.ModuleRepository;
