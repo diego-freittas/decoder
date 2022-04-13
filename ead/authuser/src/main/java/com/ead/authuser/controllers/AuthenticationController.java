@@ -33,7 +33,7 @@ public class AuthenticationController {
                                                    @Validated(UserDto.UserView.RegistrarionPost.class)
                                                    @JsonView(UserDto.UserView.RegistrarionPost.class) UserDto userDto){
 
-        log.debug("POST registerUser userDto received {}",userDto.toString());
+        log.debug("POST registerUser userDto received {} ", userDto.toString());
         if(service.existsByUsername(userDto.getUsername())){
             log.warn("Username {} is Already Taken ", userDto.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -51,7 +51,8 @@ public class AuthenticationController {
         userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         service.save(userModel);
-        log.debug("POST registerUser userModel received {}",userModel.toString());
+        log.debug("POST registerUser userModel saved {} ", userModel.toString());
+        log.info("User saved successfully userId {} ", userModel.getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body(userModel);
     }
 }
